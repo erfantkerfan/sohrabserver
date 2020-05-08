@@ -1,5 +1,5 @@
+<!DOCTYPE html>
 <!--
-
 ███████╗██████╗ ███████╗ █████╗ ███╗   ██╗     ██████╗ ██╗  ██╗ ██████╗ ██╗     ██╗███████╗ █████╗ ██████╗ ███████╗
 ██╔════╝██╔══██╗██╔════╝██╔══██╗████╗  ██║    ██╔════╝ ██║  ██║██╔═══██╗██║     ██║╚══███╔╝██╔══██╗██╔══██╗██╔════╝
 █████╗  ██████╔╝█████╗  ███████║██╔██╗ ██║    ██║  ███╗███████║██║   ██║██║     ██║  ███╔╝ ███████║██║  ██║█████╗
@@ -10,8 +10,22 @@ Erfan Gholizade
 https://github.com/erfantkerfan
 
 -->
+<?php
+$file = 10;
+$latest = 5;
 
-<!DOCTYPE html>
+$folder = isset($_GET["week"]) ? str_pad($_GET["week"], 2, "0", STR_PAD_LEFT) : str_pad($latest, 2, "0", STR_PAD_LEFT);
+if ($folder > $latest) {
+    header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
+    die();
+}
+
+$numbers = range(1, $file);
+$numbers = array_map(function ($item) {
+    return str_pad($item, 2, "0", STR_PAD_LEFT);
+}, $numbers);
+shuffle($numbers);
+?>
 <html lang='en'>
 <head>
     <meta charset=utf-8>
@@ -27,7 +41,7 @@ https://github.com/erfantkerfan
     <script>
         $(function () {
             $("#sortable").sortable();
-            $( "#sortable" ).disableSelection();
+            $("#sortable").disableSelection();
         });
     </script>
     <style>
@@ -37,8 +51,20 @@ https://github.com/erfantkerfan
             padding: 0;
             width: 100%;
         }
-        #sortable li { height: 100%; margin: 0px; border: 0px; padding: 0px}
-        #sortable li img{width: 100%; margin: 0px; border: 0px; padding: 0px;}
+
+        #sortable li {
+            height: 100%;
+            margin: 0px;
+            border: 0px;
+            padding: 0px
+        }
+
+        #sortable li img {
+            width: 100%;
+            margin: 0px;
+            border: 0px;
+            padding: 0px;
+        }
     </style>
 </head>
 <body>
@@ -47,21 +73,6 @@ https://github.com/erfantkerfan
     <div>
         <ul id="sortable">
             <?php
-            $file = 10;
-            $latest = 5;
-
-            $folder = isset($_GET["week"]) ? str_pad($_GET["week"], 2, "0", STR_PAD_LEFT) : str_pad($latest, 2, "0", STR_PAD_LEFT);
-            if ($folder > $latest) {
-                header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
-                die();
-            }
-
-            $numbers = range(1, $file);
-            $numbers = array_map(function ($item) {
-                return str_pad($item, 2, "0", STR_PAD_LEFT);
-            }, $numbers);
-            shuffle($numbers);
-
             foreach ($numbers as $number) {
                 $x =
                     "
