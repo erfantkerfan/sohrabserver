@@ -50,7 +50,7 @@ https://github.com/erfantkerfan
             $file = 10;
             $latest = 5;
 
-            $folder = isset($_GET["week"]) ? str_pad($_GET["week"], 2, "0", STR_PAD_LEFT) : $latest;
+            $folder = isset($_GET["week"]) ? str_pad($_GET["week"], 2, "0", STR_PAD_LEFT) : str_pad($latest, 2, "0", STR_PAD_LEFT);
             if ($folder > $latest) {
                 header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
                 die();
